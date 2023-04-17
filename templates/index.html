@@ -104,7 +104,8 @@
                         if (done === 0) {
                             temp_html = `<li>
                                     <h2>✅ ${bucket}</h2>
-                                    <button onclick="done_bucket(${num})" type="button" class="btn btn-outline-primary">완료!</button>
+                                    <button onclick="done_bucket(${num})" type="button" class="btn btn-outline-primary">Done!</button>
+                                    <button onclick="delete_bucket(${num})" type="button" class="btn btn-outline-danger">Delete!</button>
                                 </li>`
                         } else {
                             temp_html = `<li>
@@ -128,6 +129,7 @@
                 }
             });
         }
+
         function done_bucket(num) {
             $.ajax({
                 type: "POST",
@@ -139,6 +141,19 @@
                 }
             });
         }
+
+        function delete_bucket(num) {
+            $.ajax({
+                type: "POST",
+                url: "/delete",
+                data: { num_give: num },
+                success: function (response) {
+                    alert(response["msg"])
+                    window.location.reload()
+                }
+            });
+        }
+
     </script>
 </head>
 
